@@ -15,6 +15,8 @@ buildscript {
         classpath plugin.kotlinApt
         classpath pluginLibrary.mavenGradle
         classpath plugin.dexcountGradle
+
+        classpath "io.objectbox:objectbox-gradle-plugin:2.3.4"
     }
 }
 
@@ -28,6 +30,7 @@ allprojects {
         maven { url 'https://maven-central-eu.storage-download.googleapis.com/repos/central/data/' }
         maven { url 'https://plugins.gradle.org/m2/' }
         maven { url 'https://jitpack.io' }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 }
 

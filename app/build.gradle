@@ -1,8 +1,25 @@
+ext {
+    VERSION_NAME = simpleReleaseVersionName()
+    VERSION_CODE = commitCount()
+    isLocal = project.rootProject.file('local.properties').exists()
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.getkeepsafe.dexcount'
+
+androidExtensions {
+    experimental = true
+}
+
+kapt {
+    useBuildCache = true
+    arguments {
+        arg("objectbox.modelPath", "$rootDir/schemas/objectbox.json")
+    }
+}
 
 android {
 
@@ -10,13 +27,23 @@ android {
     buildToolsVersion buildToolsVer
 
     defaultConfig {
+        applicationId APPLICATION_ID
         multiDexEnabled true
-        applicationId "net.kibotu.androiddatabases"
+
         minSdkVersion minSdkVer
         targetSdkVersion targetSdkVer
-        versionCode 1
-        versionName "1.0"
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
+        vectorDrawables.useSupportLibrary = true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$rootDir/schemas".toString()]
+            }
+        }
     }
 
     compileOptions {
@@ -66,6 +93,25 @@ android {
 
     // endregion
 
+    // region test options
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        unitTests.all {
+            jvmArgs '-noverify'
+            testLogging {
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen { false }
+                showStandardStreams = true
+            }
+            ignoreFailures = true
+        }
+        unitTests.returnDefaultValues = true
+        unitTests.includeAndroidResources = true
+    }
+
+    // endregion
+
     // region dex options
 
     dexOptions {
@@ -79,6 +125,20 @@ android {
 
     adbOptions {
         timeOutInMs 10 * 60 * 1000 // 10 minutes
+    }
+
+    // endregion
+
+    // region exclude duplicated meta inf files
+
+    packagingOptions {
+        exclude 'META-INF/library-core_release.kotlin_module'
+        exclude 'META-INF/lib_release.kotlin_module'
+
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
     }
 
     // endregion
@@ -101,8 +161,41 @@ dependencies {
     implementation libs.exozetCore
     implementation libs.logger
 
+
+    // Core library
+    androidTestImplementation androidTestLibs.testCore
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation androidTestLibs.espressoRunnerAlpha
+    androidTestImplementation androidTestLibs.espressoRulesAlpha
+    androidTestUtil androidTestUtilLibs.orchestrator
+
+    // Assertions
+    androidTestImplementation androidTestLibs.testJUnit
+    androidTestImplementation androidTestLibs.textTruth
+    androidTestImplementation androidTestLibs.truth
+
+    // Espresso dependencies
+    androidTestImplementation androidTestLibs.espressoCore
+    androidTestImplementation androidTestLibs.espressoContrib
+    androidTestImplementation androidTestLibs.espressoIntents
+    androidTestImplementation androidTestLibs.espressoAccessibility
+    androidTestImplementation androidTestLibs.espressoWeb
+    androidTestImplementation androidTestLibs.idlingConcurrent
+    androidTestImplementation androidTestLibs.espressoIdlingResource
+    androidTestImplementation androidTestLibs.fragmentTesting
+
     testImplementation testLibs.junit
-    testImplementation testLibs.robolectric
+    testImplementation testLibs.jsonAssert
+    testImplementation testLibs.jsonUnit
+    testImplementation testLibs.jsonUnitFluent
+    testImplementation testLibs.robolectricSnapshot
+    testImplementation testLibs.truth
+    testImplementation androidTestLibs.testCore
+    testImplementation androidTestLibs.kotlinxCoroutinesTest
+    testImplementation androidTestLibs.coreTesting
+    testImplementation androidTestLibs.mockitoCore
+    androidTestImplementation androidTestLibs.mockitoAndroid
 
 }
 
