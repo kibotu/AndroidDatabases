@@ -1,0 +1,119 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.getkeepsafe.dexcount'
+
+android {
+
+    compileSdkVersion compileSdkVer
+    buildToolsVersion buildToolsVer
+
+    defaultConfig {
+        multiDexEnabled true
+        applicationId "net.kibotu.androiddatabases"
+        minSdkVersion minSdkVer
+        targetSdkVersion targetSdkVer
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // region build types
+
+    buildTypes {
+
+        debug {
+            applicationIdSuffix ""
+            pseudoLocalesEnabled true
+            debuggable true
+            minifyEnabled false
+            crunchPngs false
+            shrinkResources false
+            zipAlignEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ext.alwaysUpdateBuildId = false
+        }
+
+        release {
+            pseudoLocalesEnabled false
+            debuggable false
+            minifyEnabled true
+            crunchPngs true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // endregion
+
+    // region lint options
+
+    lintOptions {
+        disable 'InvalidPackage'
+        abortOnError false        // true by default
+        checkAllWarnings false
+        checkReleaseBuilds false
+        ignoreWarnings true       // false by default
+        quiet true                // false by default
+    }
+
+    // endregion
+
+    // region dex options
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        maxProcessCount 8
+    }
+
+    // endregion
+
+    // region adb options
+
+    adbOptions {
+        timeOutInMs 10 * 60 * 1000 // 10 minutes
+    }
+
+    // endregion
+}
+
+dependencies {
+
+    implementation libs.kotlinJdk8
+    implementation libs.supportMultidex
+    implementation libs.supportAppCompat
+    implementation libs.appCompatResources
+    implementation libs.constraintLayout
+    implementation libs.androidKtx
+
+    implementation libs.gson
+
+    implementation libs.rx2java
+    implementation libs.rx2Android
+
+    implementation libs.exozetCore
+    implementation libs.logger
+
+    testImplementation testLibs.junit
+    testImplementation testLibs.robolectric
+
+}
+
+// region override support library version
+
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 10, 'minutes'
+    resolutionStrategy.force libs.kotlinJdk8
+    resolutionStrategy.force libs.supportAppCompat
+    resolutionStrategy.force libs.appCompatResources
+    resolutionStrategy.force libs.constraintLayout
+}
+
+// endregion
