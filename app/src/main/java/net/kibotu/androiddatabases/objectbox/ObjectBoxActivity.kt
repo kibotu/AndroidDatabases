@@ -8,6 +8,6 @@ class ObjectBoxActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_objectbox_main)
+        setContentView(R.layout.notes)
     }
 }

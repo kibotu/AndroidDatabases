@@ -2,7 +2,6 @@ package net.kibotu.androiddatabases.room.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
 /**
  * Value Class
@@ -11,6 +10,5 @@ import java.util.*
 data class Note(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
-    var text: String? = null,
-    var creationDate: Long = Date().time
+    var text: String? = null
 )

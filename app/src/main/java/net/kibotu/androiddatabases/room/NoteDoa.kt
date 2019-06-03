@@ -9,7 +9,7 @@ import net.kibotu.androiddatabases.room.model.Note
 @Dao
 interface NoteDoa {
 
-    @Query("SELECT * FROM note ORDER BY creationDate DESC")
+    @Query("SELECT * FROM note ORDER BY id DESC")
     fun getAll(): LiveData<List<Note>>
 
     @Query("SELECT * FROM note ORDER BY id ASC")
