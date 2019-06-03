@@ -3,7 +3,7 @@ package net.kibotu.androiddatabases.realm
 import io.realm.Realm
 import net.kibotu.androiddatabases.realm.model.Note
 
-class NoteDao(private val realm: Realm) {
+open class NoteDao(private val realm: Realm) {
 
     fun getAll() = realm.where(Note::class.java).findAllAsync().asLiveData()
 

@@ -8,7 +8,7 @@ import org.junit.After
 import org.junit.Before
 import java.io.File
 
-abstract class AbstractObjectBoxTest : BaseTest() {
+abstract class BaseObjectBoxTest : BaseTest() {
 
     protected var store: BoxStore? = null
 

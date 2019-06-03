@@ -137,10 +137,10 @@ android {
         exclude 'META-INF/library-core_release.kotlin_module'
         exclude 'META-INF/lib_release.kotlin_module'
 
-        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
-        pickFirst 'lib/arm64-v8a/libc++_shared.so'
-        pickFirst 'lib/x86/libc++_shared.so'
-        pickFirst 'lib/x86_64/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so' // objectbox unit test
+        pickFirst 'lib/arm64-v8a/libc++_shared.so' // objectbox unit test
+        pickFirst 'lib/x86/libc++_shared.so' // objectbox unit test
+        pickFirst 'lib/x86_64/libc++_shared.so' // objectbox unit test
     }
 
     // endregion
@@ -180,8 +180,13 @@ dependencies {
     testImplementation androidTestLibs.testCore
     testImplementation androidTestLibs.kotlinxCoroutinesTest
     testImplementation androidTestLibs.coreTesting
-    testImplementation androidTestLibs.mockitoCore
+
     androidTestImplementation androidTestLibs.mockitoAndroid
+    testImplementation testLibs.mockitoCore
+    testImplementation testLibs.powermockModuleJunit4
+    testImplementation testLibs.powermockModuleJunit4Rule
+    testImplementation testLibs.powermockApiMockito2
+    testImplementation testLibs.powermockClassloadingXstream
 
     implementation libs.kotlinJdk8
     implementation libs.supportMultidex

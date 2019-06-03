@@ -8,7 +8,7 @@ import org.junit.Test
  * Created by <a href="https://about.me/janrabe">Jan Rabe</a>.
  */
 
-class NoteBoxTest : AbstractObjectBoxTest() {
+class NoteBoxTests : BaseObjectBoxTest() {
 
     @Test
     fun insert() {
