@@ -228,6 +228,12 @@ configurations.all {
     resolutionStrategy.force libs.supportAppCompat
     resolutionStrategy.force libs.appCompatResources
     resolutionStrategy.force libs.constraintLayout
+
+    resolutionStrategy.force androidTestLibs.findBugs
+    resolutionStrategy.force androidTestLibs.checkerCompatQual
+    resolutionStrategy.force androidTestLibs.checkerQual
+    resolutionStrategy.force androidTestLibs.errorProneAnnotations
+    resolutionStrategy.force androidTestLibs.guavaListenablefuture
 }
 
 // endregion
