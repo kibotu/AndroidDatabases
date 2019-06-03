@@ -23,6 +23,10 @@ import org.mockito.Mockito.verify
 import java.io.IOException
 import java.util.*
 
+/**
+ * Created by [Jan Rabe](https://about.me/janrabe).
+ */
+
 @UseExperimental(ExperimentalCoroutinesApi::class)
 class RoomTests : BaseTest() {
 

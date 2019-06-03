@@ -11,6 +11,9 @@ import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 
+/**
+ * Created by [Jan Rabe](https://about.me/janrabe).
+ */
 
 class Presenter {
 

@@ -8,6 +8,10 @@ import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
+/**
+ * Created by [Jan Rabe](https://about.me/janrabe).
+ */
+
 @ExperimentalCoroutinesApi
 class CoroutinesTestRule(val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()) : TestWatcher() {
 
