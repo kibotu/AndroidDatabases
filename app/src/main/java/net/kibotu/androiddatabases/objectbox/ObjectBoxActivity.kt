@@ -47,8 +47,6 @@ class ObjectBoxActivity : NoteActivity() {
         val box = db?.boxFor(Note::class.java)
         box?.attach(note)
         box?.put(note)
-
-        input.setText("")
     }
 
     override fun onDestroy() {

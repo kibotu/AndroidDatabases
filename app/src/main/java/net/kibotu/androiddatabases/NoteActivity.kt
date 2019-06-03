@@ -30,6 +30,7 @@ abstract class NoteActivity : AppCompatActivity() {
 
         submit.onClick {
             insert()
+            input.setText("")
         }
 
         clear.onClick {

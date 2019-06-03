@@ -46,7 +46,6 @@ class RoomActivity : NoteActivity() {
                 return@launch
 
             dao.insert(Note(text = text))
-            input.setText("")
         }
     }
 }

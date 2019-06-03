@@ -10,6 +10,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.getkeepsafe.dexcount'
 apply plugin: 'io.objectbox'
+apply plugin: 'realm-android'
 
 androidExtensions {
     experimental = true
