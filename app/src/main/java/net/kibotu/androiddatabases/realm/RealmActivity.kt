@@ -2,6 +2,7 @@ package net.kibotu.androiddatabases.realm
 
 import android.text.TextUtils
 import androidx.lifecycle.observe
+import com.exozet.android.core.extensions.stringFromAssets
 import com.exozet.android.core.extensions.textTrimmed
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -10,7 +11,10 @@ import net.kibotu.android.recyclerviewpresenter.Presenter
 import net.kibotu.android.recyclerviewpresenter.PresenterModel
 import net.kibotu.androiddatabases.NoteActivity
 import net.kibotu.androiddatabases.R
+import net.kibotu.androiddatabases.fromJson
+import net.kibotu.androiddatabases.realm.model.Node
 import net.kibotu.androiddatabases.realm.model.Note
+import net.kibotu.logger.Logger.logv
 
 
 class RealmActivity : NoteActivity() {
@@ -23,9 +27,20 @@ class RealmActivity : NoteActivity() {
 
     val noteDao by lazy { NoteDao(db) }
 
+    val noDeDao by lazy { NoDeDao(db) }
+
+    val tree by lazy { "tree.json".stringFromAssets().fromJson<Node>() }
+
     override val presenter: Presenter<*> = NotePresenter()
 
     override fun subscribe() {
+
+        noDeDao.getAll().observe(this) {
+
+            it.forEach {
+                logv("nodes: $it")
+            }
+        }
 
         val liveData = noteDao.getAll()
         liveData.observe(this) {
@@ -40,9 +55,13 @@ class RealmActivity : NoteActivity() {
 
     override fun deleteAll() {
         noteDao.deleteAll()
+        noteDao.deleteAll()
     }
 
     override fun insert() {
+
+        noDeDao.insert(tree)
+
         val text = input.textTrimmed
         if (TextUtils.isEmpty(text))
             return
