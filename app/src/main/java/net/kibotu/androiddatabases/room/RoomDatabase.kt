@@ -10,9 +10,9 @@ import net.kibotu.logger.Logger.logv
 
 
 @Database(
-        entities = [Note::class],
-        version = 2,
-        exportSchema = true
+    entities = [Note::class],
+    version = 1,
+    exportSchema = true
 )
 abstract class NoteDatabase : RoomDatabase() {
 
@@ -21,11 +21,11 @@ abstract class NoteDatabase : RoomDatabase() {
     companion object {
 
         fun create() = Room.databaseBuilder(application!!, NoteDatabase::class.java, "note-db")
-                .fallbackToDestructiveMigration()
-                .addCallback(object : RoomDatabase.Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        logv("db created")
-                    }
-                }).build()
+            .fallbackToDestructiveMigration()
+            .addCallback(object : RoomDatabase.Callback() {
+                override fun onCreate(db: SupportSQLiteDatabase) {
+                    logv("db created")
+                }
+            }).build()
     }
 }
