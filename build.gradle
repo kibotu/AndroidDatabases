@@ -16,7 +16,8 @@ buildscript {
         classpath pluginLibrary.mavenGradle
         classpath plugin.dexcountGradle
 
-        classpath "io.objectbox:objectbox-gradle-plugin:2.3.4"
+        classpath plugin.objectBox
+        classpath plugin.realm
     }
 }
 

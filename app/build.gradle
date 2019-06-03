@@ -146,22 +146,6 @@ android {
 
 dependencies {
 
-    implementation libs.kotlinJdk8
-    implementation libs.supportMultidex
-    implementation libs.supportAppCompat
-    implementation libs.appCompatResources
-    implementation libs.constraintLayout
-    implementation libs.androidKtx
-
-    implementation libs.gson
-
-    implementation libs.rx2java
-    implementation libs.rx2Android
-
-    implementation libs.exozetCore
-    implementation libs.logger
-
-
     // Core library
     androidTestImplementation androidTestLibs.testCore
 
@@ -197,6 +181,43 @@ dependencies {
     testImplementation androidTestLibs.mockitoCore
     androidTestImplementation androidTestLibs.mockitoAndroid
 
+    implementation libs.kotlinJdk8
+    implementation libs.supportMultidex
+    implementation libs.supportAppCompat
+    implementation libs.appCompatResources
+    implementation libs.supportDesign
+    implementation libs.constraintLayout
+    implementation libs.androidKtx
+
+    // viewmodel and lifecycle
+    implementation libs.lifecycleExtensions
+    implementation libs.lifecycleViewmodel
+    implementation libs.lifecycleLivedata
+    kapt libs.lifecycleCompiler
+    implementation libs.lifecycleRuntime
+    implementation libs.lifecycleRuntimeKtx
+    implementation libs.lifecycleLivedataKtx
+    implementation libs.androidKtxLifecycleViewmodel
+
+    // pagination
+    implementation libs.pagingRuntimeKtx
+
+    implementation libs.gson
+    implementation libs.rx2java
+    implementation libs.rx2Android
+
+    implementation libs.exozetCore
+    implementation libs.logger
+    implementation libs.recyclerViewPresenter4
+    implementation libs.recyclerviewAnimators
+    implementation libs.polet
+
+    // room
+    androidTestImplementation androidTestLibs.roomTesting
+
+    implementation libs.persistenceRoomRuntime
+    implementation libs.androidRoomKtx
+    kapt libs.persistenceRoomCompiler
 }
 
 // region override support library version
