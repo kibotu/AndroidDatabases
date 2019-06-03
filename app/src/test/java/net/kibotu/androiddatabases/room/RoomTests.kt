@@ -65,7 +65,7 @@ class RoomTests : BaseTest() {
             }
         }
 
-        val note = Note(UUID.randomUUID().toString().hashCode())
+        val note = Note(UUID.randomUUID().toString().hashCode(), "hallo world")
         assertThat(note).isNotNull()
 
         val observer = lambdaMock<(Note) -> Unit>()
@@ -90,7 +90,7 @@ class RoomTests : BaseTest() {
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
 
-            val note = Note(UUID.randomUUID().toString().hashCode())
+            val note = Note(UUID.randomUUID().toString().hashCode(), "hallo world")
             assertThat(note).isNotNull()
             noteDoa.insert(note)
 

@@ -1,4 +1,4 @@
-package net.kibotu.androiddatabases.ui
+package net.kibotu.androiddatabases.objectbox
 
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_note.view.*
@@ -6,7 +6,7 @@ import net.kibotu.android.recyclerviewpresenter.Adapter
 import net.kibotu.android.recyclerviewpresenter.Presenter
 import net.kibotu.android.recyclerviewpresenter.PresenterModel
 import net.kibotu.androiddatabases.R
-import net.kibotu.androiddatabases.room.model.Note
+import net.kibotu.androiddatabases.objectbox.model.Note
 
 class NotePresenter : Presenter<Note>() {
 

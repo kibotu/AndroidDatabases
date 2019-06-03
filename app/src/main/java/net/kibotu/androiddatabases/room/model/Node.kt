@@ -1,5 +1,7 @@
 package net.kibotu.androiddatabases.room.model
 
+import net.kibotu.androiddatabases.objectbox.model.Node
+
 
 /**
  * Tree Structure
