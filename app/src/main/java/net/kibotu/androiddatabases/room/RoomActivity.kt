@@ -36,28 +36,33 @@ class RoomActivity : AppCompatActivity() {
 
         setupRecyclerView()
 
-        // deleteAll()
-
         dao.getAll().observe(this) {
             val items = it.map { PresenterModel(model = it, layout = R.layout.item_note, uuid = it.id.toString()) }
             adapter?.submitList(items)
         }
 
         submit.onClick {
-            lifecycleScope.launch {
+            insert()
+        }
 
-                val text = input.textTrimmed
-                if (text.isNotEmpty()) {
-                    dao.insert(Note(text = text))
-                    input.setText("")
-                }
-            }
+        clear.onClick {
+            deleteAll()
         }
     }
 
     private fun deleteAll() {
         lifecycleScope.launch {
-            db.noteDao().deleteAll()
+            dao.deleteAll()
+        }
+    }
+
+    private fun insert() {
+        lifecycleScope.launch {
+            val text = input.textTrimmed
+            if (text.isNotEmpty()) {
+                dao.insert(Note(text = text))
+                input.setText("")
+            }
         }
     }
 
