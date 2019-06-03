@@ -278,3 +278,9 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/macos,gradle,windows,android,jetbrains,androidstudio
 
 .idea/
+
+# ObjectBox: native libs, model backups
+objectbox*.dll
+libobjectbox*.so
+libobjectbox*.dylib
+default.json.bak
