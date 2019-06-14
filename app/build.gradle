@@ -152,8 +152,8 @@ dependencies {
     androidTestImplementation androidTestLibs.testCore
 
     // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation androidTestLibs.espressoRunnerAlpha
-    androidTestImplementation androidTestLibs.espressoRulesAlpha
+    androidTestImplementation androidTestLibs.espressoRunner
+    androidTestImplementation androidTestLibs.espressoRules
     androidTestUtil androidTestUtilLibs.orchestrator
 
     // Assertions
@@ -188,13 +188,22 @@ dependencies {
     testImplementation testLibs.powermockApiMockito2
     testImplementation testLibs.powermockClassloadingXstream
 
-    implementation libs.kotlinJdk8
     implementation libs.supportMultidex
+
+    implementation libs.kotlinJdk8
+    implementation libs.kotlinxCoroutinesCore
+    implementation libs.kotlinxCoroutinesAndroid
+
     implementation libs.supportAppCompat
     implementation libs.appCompatResources
+    implementation libs.androidKtxCore
+    implementation libs.activityKtx
+    implementation libs.fragmentKtx
     implementation libs.supportDesign
-    implementation libs.constraintLayout
-    implementation libs.androidKtx
+    implementation libs.constraintLayout2
+    implementation libs.supportRecyclerview
+    implementation libs.supportAnnotations
+    implementation libs.supportVectorDrawable
 
     // viewmodel and lifecycle
     implementation libs.lifecycleExtensions
@@ -205,6 +214,16 @@ dependencies {
     implementation libs.lifecycleRuntimeKtx
     implementation libs.lifecycleLivedataKtx
     implementation libs.androidKtxLifecycleViewmodel
+
+    implementation libs.koinAndroidxScope
+    implementation libs.koinAndroidxViewmodel
+
+    implementation libs.androidKtxCollection
+
+    implementation libs.androidKtxNavigationCommon
+    implementation libs.androidKtxNavigationFragment
+    implementation libs.androidKtxNavigationUi
+    implementation libs.androidKtxNavigationRuntime
 
     // pagination
     implementation libs.pagingRuntimeKtx
@@ -230,12 +249,10 @@ dependencies {
 // region override support library version
 
 configurations.all {
-    resolutionStrategy.cacheDynamicVersionsFor 10, 'minutes'
-    resolutionStrategy.force libs.kotlinJdk8
-    resolutionStrategy.force libs.supportAppCompat
-    resolutionStrategy.force libs.appCompatResources
-    resolutionStrategy.force libs.constraintLayout
 
+    resolutionStrategy.cacheDynamicVersionsFor 10, 'minutes'
+
+    // required for gradle uninstallAll
     resolutionStrategy.force androidTestLibs.findBugs
     resolutionStrategy.force androidTestLibs.checkerCompatQual
     resolutionStrategy.force androidTestLibs.checkerQual
