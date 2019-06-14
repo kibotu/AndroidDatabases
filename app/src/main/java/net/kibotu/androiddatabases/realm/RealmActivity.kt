@@ -27,7 +27,7 @@ class RealmActivity : NoteActivity() {
 
     val noteDao by lazy { NoteDao(db) }
 
-    val noDeDao by lazy { NoDeDao(db) }
+    val noDeDao by lazy { NodeDao(db) }
 
     val tree by lazy { "tree.json".stringFromAssets().fromJson<Node>() }
 

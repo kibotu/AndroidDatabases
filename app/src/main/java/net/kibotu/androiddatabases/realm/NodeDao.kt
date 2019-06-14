@@ -4,7 +4,7 @@ import io.realm.Realm
 import net.kibotu.androiddatabases.realm.model.Node
 
 
-open class NoDeDao(private val realm: Realm) {
+open class NodeDao(private val realm: Realm) {
 
     fun getAll() = realm.where(Node::class.java).findAllAsync().asLiveData()
 
